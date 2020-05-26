@@ -1,4 +1,9 @@
 <?php
+	ini_set('display_errors', 0);
+	ini_set('display_startup_errors', 0);
+	
+	error_reporting(E_ALL);
+	
 	if ($_POST['user'] != "") {
 		include "cookie.php";
 	}
@@ -23,33 +28,25 @@
 		if ($_COOKIE['user'] == "" && empty($_COOKIE['user'])) {
 			print '
 			 <form action="index.php" method="POST" name="signin">
-				<input type="hidden" id="control" name="control" value="true">
+				
 				<div class="form-check">
 					<label for="user">Korisnik:*</label>
-					<input type="text" id="user" name="user" class="form-control" required>
+					<input type="text" id="user" name="user" class="form-control">
 				</div>
 				<div class="form-check">
 					<label for="pass">Lozinka:*</label>
-					<input type="password" id="pass" name="pass" class="form-control" required>
+					<input type="password" id="pass" name="pass" class="form-control">
 				</div>
 				<input type="submit" value="Pošalji" class="btn btn-primary">
 			 </form>';
 		} 
 		else {
-			   if (!isset($_POST['control'])) { $_POST['control'] = false; }
-			   if($_POST['control'] == true) {
-					if (isset($_POST["user"]) && isset($_POST["pass"]))   {
-						  if ($_POST["user"] == "admin" && $_POST["pass"] == "123")     {  
-							   echo "<p>Uspješna prijava!</p>";
-						  }     
-						  else {  echo "<p>Neuspješna prijava!</p>";     }   
-					} 
-			   }
-			   if (isset($_COOKIE['user']) && !empty($_COOKIE['user']) && $_COOKIE['user'] == "admin") {
-				echo "<p><b>Dobrodošao:</b> " . $_COOKIE['user'] ."</p>";
-				echo '<p><a href="signout.php">Odjavi se</a></p>';
-			   }
-		}
+			   
+			if (isset($_COOKIE['user']) && !empty($_COOKIE['user'])) {
+			 echo "<p><b>Dobrodošao:</b> " . $_COOKIE['user'] ."</p>";
+			 echo '<p><a href="signout.php">Odjavi se</a></p>';
+			}  
+	 }
 	
 	 ?>
 </div>
